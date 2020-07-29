@@ -31,6 +31,7 @@ or implied, of Rafael Muñoz Salinas.
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/calib3d/calib3d.hpp>
 #include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc_c.h>
 #include <iostream>
 #include <fstream>
 #include <valarray>
@@ -121,7 +122,7 @@ void MarkerDetector::detect(const cv::Mat &input, vector< Marker > &detectedMark
 //omp_set_num_threads(1);
     // it must be a 3 channel image
     if (input.type() == CV_8UC3)
-        cv::cvtColor(input, grey, CV_BGR2GRAY);
+        cv::cvtColor(input, grey, COLOR_BGR2GRAY);
     else
         grey = input;
 
@@ -1045,10 +1046,10 @@ void MarkerDetector::drawApproxCurve(Mat &in, vector< Point > &contour, Scalar c
 
 void MarkerDetector::draw(Mat out, const vector< Marker > &markers) {
     for (unsigned int i = 0; i < markers.size(); i++) {
-        cv::line(out, markers[i][0], markers[i][1], cvScalar(255, 0, 0), 2, CV_AA);
-        cv::line(out, markers[i][1], markers[i][2], cvScalar(255, 0, 0), 2, CV_AA);
-        cv::line(out, markers[i][2], markers[i][3], cvScalar(255, 0, 0), 2, CV_AA);
-        cv::line(out, markers[i][3], markers[i][0], cvScalar(255, 0, 0), 2, CV_AA);
+        cv::line(out, markers[i][0], markers[i][1], cvScalar(255, 0, 0), 2, cv::LINE_AA);
+        cv::line(out, markers[i][1], markers[i][2], cvScalar(255, 0, 0), 2, cv::LINE_AA);
+        cv::line(out, markers[i][2], markers[i][3], cvScalar(255, 0, 0), 2, cv::LINE_AA);
+        cv::line(out, markers[i][3], markers[i][0], cvScalar(255, 0, 0), 2, cv::LINE_AA);
     }
 }
 /* Attempt to make it faster than in opencv. I could not :( Maybe trying with SSE3...

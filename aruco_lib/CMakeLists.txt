@@ -46,7 +46,7 @@ FILE(GLOB_RECURSE LIB_ARUCO_SOURCE_FILES
 find_package(catkin REQUIRED)
 
 #opencv
-find_package(OpenCV REQUIRED)
+find_package(OpenCV 4.4 REQUIRED)
 
 
 catkin_package(
